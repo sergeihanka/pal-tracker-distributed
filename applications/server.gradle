@@ -5,7 +5,7 @@ dependencies {
     compile project(":components:rest-support")
 
     compile "org.springframework.boot:spring-boot-starter-web"
-
+    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker"
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
 

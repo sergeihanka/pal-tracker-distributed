@@ -1,0 +1,35 @@
+File submission:
+
+    -PregistrationServerUrl=https://registration-pal-sergei-hanka.apps.longs.pal.pivotal.io \
+    -PbacklogServerUrl=https://backlog-pal-sergei-hanka.apps.longs.pal.pivotal.io \
+    -PallocationsServerUrl=https://allocations-pal-sergei-hanka.apps.longs.pal.pivotal.io \
+    -PtimesheetsServerUrl=https://timesheets-pal-sergei-hanka.apps.longs.pal.pivotal.io
+
+CURL Tests:
+
+    CALLNAME="Pete"
+    CALLUSERID=1
+    CALLACCTID=1
+    CALLPROJID=1
+
+    curl -i -XPOST -H"Content-Type: application/json" https://registration-pal-sergei-hanka.apps.longs.pal.pivotal.io/registration -d'{"name": $CALLNAME}'
+
+    curl -i https://registration-pal-sergei-hanka.apps.longs.pal.pivotal.io/users/$CALLUSERID
+
+    curl -i https://registration-pal-sergei-hanka.apps.longs.pal.pivotal.io/accounts?ownerId=$CALLUSERID
+
+    curl -i -XPOST -H"Content-Type: application/json" https://registration-pal-sergei-hanka.apps.longs.pal.pivotal.io/projects -d'{"name": "Basket Weaving", "accountId": $CALLACCTID}'
+
+    curl -i https://registration-pal-sergei-hanka.apps.longs.pal.pivotal.io/projects?accountId=$CALLACCTID
+
+    curl -i -XPOST -H"Content-Type: application/json" https://allocations-pal-sergei-hanka.apps.longs.pal.pivotal.io/allocations -d'{"projectId": $CALLPROJID, "userId": $CALLUSERID, "firstDay": "2015-05-17", "lastDay": "2015-05-18"}'
+
+    curl -i https://allocations-pal-sergei-hanka.apps.longs.pal.pivotal.io//allocations?projectId=$CALLPROJID
+
+    curl -i -XPOST -H"Content-Type: application/json" https://backlog-pal-sergei-hanka.apps.longs.pal.pivotal.io/stories -d'{"projectId": $CALLPROJID, "name": "Find some reeds"}'
+
+    curl -i https://backlog-pal-sergei-hanka.apps.longs.pal.pivotal.io/stories?projectId=$CALLPROJID
+
+    curl -i -XPOST -H"Content-Type: application/json" https://timesheets-pal-sergei-hanka.apps.longs.pal.pivotal.io/time-entries/ -d'{"projectId": $CALLPROJID, "userId": $CALLUSERID, "date": "2015-05-17", "hours": 6}'
+
+curl -i https://timesheets-pal-sergei-hanka.apps.longs.pal.pivotal.io/time-entries?userId=$CALLUSERID
